@@ -116,7 +116,7 @@ html {
 3. MAIN SECTION
 --------------------------------- */
 
-.main-area-wrapper{ height: 100%; padding: 30px; }
+.main-area-wrapper{ height: 100%; padding: 30px; background: #808080; }
 
 .main-area{ position: relative; z-index: 1; height: 100%; padding: 0 20px; background-size: cover;
 	box-shadow: 2px 5px 30px rgba(0,0,0,.3); color: #fff; }
