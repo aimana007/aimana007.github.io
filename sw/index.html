@@ -604,7 +604,11 @@
     load();
     initTheme();
     initUI();
-    render();
+    if(items.length === 0){
+      loadSeedData().finally(render);
+    }else{
+      render();
+    }
 
     function effectiveTheme(){
       const stored = localStorage.getItem(THEME_KEY);
@@ -1224,6 +1228,28 @@
       const url = URL.createObjectURL(blob);
       download(url, "job-applications.json");
     }
+    function normalizeImportedEntry(e){
+      return {
+        id: typeof e.id === "string" && e.id ? e.id : genId(),
+        company: String(e.company || "").trim(),
+        role: String(e.role || "").trim(),
+        location: String(e.location || ""),
+        recordedDate: e.recordedDate || e.appliedDate || "",
+        lastContactedAt: e.lastContactedAt || "",
+        status: normalizeStatus(e.status || "Applied", { allowCreate: true }),
+        link: String(e.link || ""),
+        contactName: String(e.contactName || ""),
+        contactInfo: String(e.contactInfo || ""),
+        nextActionDate: e.nextActionDate || "",
+        nextActionNote: String(e.nextActionNote || ""),
+        salary: String(e.salary || ""),
+        tags: Array.isArray(e.tags) ? e.tags.map(sanitizeTagName).filter(Boolean) : [],
+        notes: String(e.notes || ""),
+        firstRespondedAt: e.firstRespondedAt || "",
+        lastUpdated: e.lastUpdated || new Date().toISOString()
+      };
+    }
+
     function importJSON(ev){
       const file = ev.target.files && ev.target.files[0];
       ev.target.value = "";
@@ -1241,25 +1267,7 @@
           for(const e of arr){
             if(!e || typeof e !== "object") continue;
             if(!e.company || !e.role) continue;
-            const entry = {
-              id: typeof e.id === "string" && e.id ? e.id : genId(),
-              company: String(e.company || "").trim(),
-              role: String(e.role || "").trim(),
-              location: String(e.location || ""),
-              recordedDate: e.recordedDate || e.appliedDate || "",
-              lastContactedAt: e.lastContactedAt || "",
-              status: normalizeStatus(e.status || "Applied", { allowCreate: true }),
-              link: String(e.link || ""),
-              contactName: String(e.contactName || ""),
-              contactInfo: String(e.contactInfo || ""),
-              nextActionDate: e.nextActionDate || "",
-              nextActionNote: String(e.nextActionNote || ""),
-              salary: String(e.salary || ""),
-              tags: Array.isArray(e.tags) ? e.tags.map(sanitizeTagName).filter(Boolean) : [],
-              notes: String(e.notes || ""),
-              firstRespondedAt: e.firstRespondedAt || "",
-              lastUpdated: e.lastUpdated || new Date().toISOString()
-            };
+            const entry = normalizeImportedEntry(e);
             const idx = items.findIndex(x => x.id === entry.id);
             if(idx >= 0) items[idx] = entry; else items.push(entry);
             count++;
@@ -1270,6 +1278,30 @@
         }catch(err){ alert("Import failed: " + (err && err.message ? err.message : err)); }
       };
       reader.readAsText(file);
+    }
+
+    // First-ever visit (nothing in localStorage yet): try to seed the board from
+    // job-applications.json sitting next to index.html, so the app isn't empty.
+    // Fails silently (e.g. opened via file:// with fetch blocked) — user just starts blank.
+    async function loadSeedData(){
+      try{
+        const res = await fetch("job-applications.json", { cache: "no-store" });
+        if(!res.ok) return;
+        const obj = await res.json();
+        const arr = Array.isArray(obj) ? obj : (Array.isArray(obj.data) ? obj.data : null);
+        if(!arr) return;
+        const seeded = [];
+        for(const e of arr){
+          if(!e || typeof e !== "object") continue;
+          if(!e.company || !e.role) continue;
+          seeded.push(normalizeImportedEntry(e));
+        }
+        if(seeded.length){
+          items = seeded;
+          refreshStatusOptions();
+          save();
+        }
+      }catch(err){ /* no seed file available — start with an empty board */ }
     }
 
     function todayISO(){
