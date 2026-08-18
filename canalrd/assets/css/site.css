@@ -1,0 +1,296 @@
+/* Custom styles for the 15943 Canal Road auction page.
+   Layered on top of the trimmed Landor template CSS (main.css / bootstrap / spacing).
+   Kept separate so template updates and our overrides never tangle. */
+
+/* ---------- Accent color override ---------- */
+/* main.css defines --tp-orange-color: #E6641C and uses that one variable
+   everywhere (buttons, eyebrows, hero border, focus states). Overriding its
+   value here — rather than hand-editing 40+ spots in the vendor file —
+   reskins the whole accent in one line. The variable name still says
+   "orange"; the color itself is now a canal/pond blue, chosen to echo the
+   property's water features rather than a generic accent swap. */
+:root {
+    --tp-orange-color: #1C74A6;
+}
+
+/* ---------- Hero (real exterior photo, darkest under the text column) ---------- */
+.canal-hero {
+    background:
+        linear-gradient(100deg, rgba(13, 17, 16, 0.94) 0%, rgba(13, 17, 16, 0.88) 40%, rgba(13, 17, 16, 0.6) 72%, rgba(13, 17, 16, 0.38) 100%),
+        url("../img/hero/hero-exterior.jpg") center 55% / cover no-repeat;
+    color: var(--tp-white-color);
+    padding: 150px 0 70px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--tp-orange-color);
+}
+.canal-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.035) 0 2px, transparent 2px 60px);
+    pointer-events: none;
+}
+.canal-hero-eyebrow {
+    display: inline-block;
+    color: var(--tp-orange-color);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+.canal-hero-title {
+    font-family: var(--tp-playfair-font);
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.08;
+    font-weight: 700;
+    margin-bottom: 18px;
+    /* main.css sets h1-h6 { color: var(--tp-theme-color) } (black) as a direct
+       element-selector rule, which beats the inherited white from .canal-hero
+       no matter how specific that ancestor rule is — inheritance always loses
+       to any rule that matches the element itself. Must be set explicitly here. */
+    color: var(--tp-white-color);
+}
+.canal-hero-lede {
+    font-size: clamp(17px, 2.4vw, 20px);
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 640px;
+    margin-bottom: 30px;
+}
+.canal-hero-datebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 28px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 16px 22px;
+    margin-bottom: 34px;
+}
+.canal-hero-datebar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.canal-hero-datebar-label {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+}
+.canal-hero-datebar-value {
+    font-weight: 700;
+    font-size: 16px;
+}
+.canal-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* ---------- Placeholder media (real photos/video drop in later) ---------- */
+.media-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    min-height: 220px;
+    background: var(--tp-gray-color);
+    border: 2px dashed rgba(64, 64, 56, 0.28);
+    border-radius: 16px;
+    color: var(--tp-body-color);
+}
+.media-placeholder-inner {
+    max-width: 320px;
+}
+.media-placeholder-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tp-orange-color);
+    margin-bottom: 8px;
+}
+.media-placeholder-caption {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.85;
+}
+
+/* Real <img> tags pointing at not-yet-shot photos. Sized/backed so the
+   browser's broken-image fallback still reads as an intentional gap; once
+   a real file lands at the same src, it fills the box via object-fit with
+   no markup changes needed. */
+figure.gallery-figure {
+    margin: 0;
+}
+.property-photo {
+    display: block;
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 20px;
+    background: var(--tp-gray-color);
+    outline: 1px dashed rgba(64, 64, 56, 0.28);
+    outline-offset: -1px;
+}
+figure.gallery-figure figcaption {
+    margin-top: 10px;
+    font-size: 14px;
+    color: var(--tp-body-color);
+    opacity: 0.85;
+}
+
+/* ---------- "How to bid" listing-link state (no live URL yet) ---------- */
+.listing-link-pending {
+    display: block;
+    border: 2px dashed rgba(64, 64, 56, 0.3);
+    border-radius: 16px;
+    padding: 22px 24px;
+    background: var(--tp-white-color);
+}
+.listing-link-pending strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* ---------- Alternating section banding ---------- */
+/* Distinct from --tp-gray-color (#F5F5F5, ~4% tint, used for inset cards) —
+   this is a visibly darker 10% gray applied to whole sections so every other
+   section reads as a separate band against the white ones around it. */
+.canal-section-gray {
+    background-color: #E6E6E6;
+}
+
+/* ---------- "Take a Tour" appointment note ---------- */
+.tour-appointment-note {
+    display: block;
+    border: 2px dashed rgba(230, 100, 28, 0.45);
+    border-radius: 16px;
+    padding: 22px 24px;
+    background: rgba(230, 100, 28, 0.06);
+}
+.tour-appointment-note > strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--tp-orange-color);
+}
+
+/* ---------- "Buy It Now" section accent (red, distinct from the blue brand accent) ---------- */
+/* Deliberately its own color, not var(--tp-orange-color): that variable is
+   the everyday brand blue (see accent override above). The whole Buy It Now
+   section — eyebrow, CTA button, and the deadline callout below — shares
+   this one red so the section reads as urgent/time-limited against the
+   rest of the page. */
+:root {
+    --tp-urgent-color: #DC2626;
+}
+#buy-now .canal-section-eyebrow {
+    color: var(--tp-urgent-color);
+}
+.tp-btn-urgent {
+    background-color: var(--tp-urgent-color);
+    color: var(--tp-white-color);
+}
+.tp-btn-urgent .tp-btn-icon::before {
+    background-color: var(--tp-white-color);
+}
+.tp-btn-urgent .tp-btn-icon svg {
+    color: var(--tp-theme-color);
+}
+.tp-btn-urgent:hover {
+    color: var(--tp-white-color);
+}
+.buy-now-deadline {
+    display: block;
+    border: 2px solid var(--tp-urgent-color);
+    border-radius: 16px;
+    padding: 22px 24px;
+    background: rgba(220, 38, 38, 0.06);
+}
+.buy-now-deadline > strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--tp-urgent-color);
+}
+.buy-now-deadline-date {
+    font-weight: 700;
+    color: var(--tp-urgent-color);
+}
+
+/* ---------- Buttons without an icon ---------- */
+/* .tp-btn ships lopsided padding (8px 8px 8px 25px) because it's designed
+   around a round .tp-btn-icon filling the right side; buttons with only
+   .tp-btn-text and no icon inherit that gap and look shoved left. */
+.tp-btn-solo {
+    padding: 8px 25px;
+}
+@media only screen and (min-width: 768px) and (max-width: 991.98px), (max-width: 574.98px), only screen and (min-width: 576px) and (max-width: 767.98px) {
+    .tp-btn-solo {
+        padding: 6px 20px;
+    }
+}
+
+/* ---------- Scroll reveal (skipped entirely when reduced motion is preferred, see site.js) ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ---------- Focus states ---------- */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--tp-orange-color);
+    outline-offset: 3px;
+}
+
+/* Template default bleeds this carousel -130px past its container (designed for
+   container-wide use elsewhere); inside our regular .container that risks a
+   horizontal scrollbar at in-between viewport widths, so keep it contained. */
+.tp-project-gallery-active {
+    margin: 0 !important;
+}
+
+/* ---------- Misc ---------- */
+.canal-section-eyebrow {
+    color: var(--tp-orange-color);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.canal-honesty-note {
+    font-size: 14px;
+    color: rgba(64, 64, 56, 0.75);
+    border-left: 3px solid var(--tp-orange-color);
+    padding-left: 14px;
+}
