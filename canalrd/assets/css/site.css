@@ -180,17 +180,13 @@ figure.gallery-figure figcaption {
     color: var(--tp-orange-color);
 }
 
-/* ---------- "Buy It Now" section accent (red, distinct from the blue brand accent) ---------- */
+/* ---------- Registration CTA accent (red, distinct from the blue brand accent) ---------- */
 /* Deliberately its own color, not var(--tp-orange-color): that variable is
-   the everyday brand blue (see accent override above). The whole Buy It Now
-   section — eyebrow, CTA button, and the deadline callout below — shares
-   this one red so the section reads as urgent/time-limited against the
-   rest of the page. */
+   the everyday brand blue (see accent override above). The primary
+   "Register to Bid" buttons use this red so the time-limited action reads
+   as urgent against the rest of the page. */
 :root {
     --tp-urgent-color: #DC2626;
-}
-#buy-now .canal-section-eyebrow {
-    color: var(--tp-urgent-color);
 }
 .tp-btn-urgent {
     background-color: var(--tp-urgent-color);
@@ -204,22 +200,6 @@ figure.gallery-figure figcaption {
 }
 .tp-btn-urgent:hover {
     color: var(--tp-white-color);
-}
-.buy-now-deadline {
-    display: block;
-    border: 2px solid var(--tp-urgent-color);
-    border-radius: 16px;
-    padding: 22px 24px;
-    background: rgba(220, 38, 38, 0.06);
-}
-.buy-now-deadline > strong {
-    display: block;
-    margin-bottom: 6px;
-    color: var(--tp-urgent-color);
-}
-.buy-now-deadline-date {
-    font-weight: 700;
-    color: var(--tp-urgent-color);
 }
 
 /* ---------- Buttons without an icon ---------- */
