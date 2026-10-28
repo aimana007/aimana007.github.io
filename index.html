@@ -152,6 +152,9 @@
         .wrap { max-width: 960px; margin: 0 auto; }
         .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; font-weight: 600; }
         .block h2 { font-size: clamp(28px, 5vw, 40px); margin: 8px 0 20px; }
+        .intro { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; }
+        .intro > div { flex: 1 1 320px; }
+        .portrait { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 0 24px rgba(166,242,28,.25); }
 
         .book {
             display: grid;
@@ -427,9 +430,14 @@
 
         <section class="block" id="work" style="padding-top:0">
             <div class="wrap">
-                <span class="eyebrow">The Day Job</span>
-                <h2>Systems that stay up</h2>
-                <p style="color:var(--muted); max-width:680px">From supercomputers to streaming radio to medical records, I build and run the infrastructure nobody notices until it breaks, and I make sure it doesn't.</p>
+                <div class="intro">
+                    <img class="portrait" src="/images/portrait.jpeg" alt="Aiman Al-Khazaali in front of a server rack" width="160" height="160" loading="lazy">
+                    <div>
+                        <span class="eyebrow">The Day Job</span>
+                        <h2>Systems that stay up</h2>
+                        <p style="color:var(--muted); max-width:680px">From supercomputers to streaming radio to medical records, I build and run the infrastructure nobody notices until it breaks, and I make sure it doesn't.</p>
+                    </div>
+                </div>
                 <div class="wins">
                     <div class="win"><strong>&lt;3 hrs</strong><span>to restore every service during an Anonymous DDoS attack</span><em>iHeartRadio</em></div>
                     <div class="win"><strong>$300k</strong><span>a year saved by finding and sunsetting programs nobody was using</span><em>Transcat</em></div>
