@@ -154,7 +154,11 @@
         .block h2 { font-size: clamp(28px, 5vw, 40px); margin: 8px 0 20px; }
         .intro { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 32px; }
         .intro > div { flex: 1 1 320px; }
-        .portrait { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 0 24px rgba(166,242,28,.25); }
+        .portrait, .badge { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 0 24px rgba(166,242,28,.25); }
+        .badge { display: grid; place-items: center; background: var(--bg); }
+        .intro > .badge { flex: none; }
+        .badge img { width: 58%; height: auto; }
+        .intro + .project { margin-top: 40px; }
 
         .book {
             display: grid;
@@ -167,22 +171,16 @@
         }
         @media (min-width: 800px) { .book { grid-template-columns: 240px 1fr; } }
         .cover {
-            aspect-ratio: 2 / 3;
+            display: block;
             width: 100%;
             max-width: 240px;
+            height: auto;
             margin: 0 auto;
             border-radius: 6px;
-            background: linear-gradient(160deg, #1a2214, #070907);
             border: 1px solid var(--line);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 22px;
-            box-shadow: 0 20px 50px rgba(0,0,0,.6), inset 0 0 0 1px rgba(166,242,28,.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,.6);
         }
-        .cover strong { font-family: Poppins, sans-serif; font-weight: 500; font-size: 24px; line-height: 1.15; }
-        .cover span { color: var(--accent); font-size: 14px; margin-top: 8px; }
-        .cover em { color: var(--muted); font-style: normal; font-size: 12px; margin-top: 18px; letter-spacing: .08em; text-transform: uppercase; }
+        .book .subtitle { margin: -12px 0 18px; color: var(--muted); font-size: clamp(17px, 2.4vw, 20px); line-height: 1.3; }
         .book ul { padding-left: 20px; color: var(--muted); }
         .book li { margin-bottom: 6px; }
         .status { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--accent); font-size: 13px; }
@@ -304,7 +302,7 @@
         },
         {
           "@type": "Book",
-          "name": "The Child Safety Protocol: Online and Beyond",
+          "name": "The Child Safety Protocol: A Practical Guide to Protecting Kids Online and Beyond",
           "author": {
             "@id": "https://aimana.org/#me"
           },
@@ -437,9 +435,14 @@
 
         <section class="block" id="built" style="padding-top:0">
             <div class="wrap">
-                <span class="eyebrow">Things I Built</span>
-                <h2>Ungated</h2>
-                <p class="origin">Built from a hospital bed while I spent a month <a href="https://ink.aimana.org/p/sepsis-iv-lines-and-shipping-code">beating sepsis</a>.</p>
+                <div class="intro">
+                    <div class="badge"><img src="/images/ungated-mark.svg" alt="Ungated logo" width="93" height="64"></div>
+                    <div>
+                        <span class="eyebrow">Things I Built</span>
+                        <h2>Ungated</h2>
+                        <p class="origin">Built from a hospital bed while I spent a month <a href="https://ink.aimana.org/p/sepsis-iv-lines-and-shipping-code">beating sepsis</a>.</p>
+                    </div>
+                </div>
                 <div class="project">
                     <div>
                         <h3>Ungate your job search</h3>
@@ -491,14 +494,11 @@
         <section class="block" id="book" style="padding-top:0">
             <div class="wrap">
                 <div class="book">
-                    <div class="cover" aria-hidden="true">
-                        <strong>The Child Safety Protocol</strong>
-                        <span>Online and Beyond</span>
-                        <em>Aiman Al-Khazaali</em>
-                    </div>
+                    <img class="cover" src="/images/tcsp-cover.jpg" alt="Cover of The Child Safety Protocol by Aiman Al-Khazaali: two children in raincoats holding hands on a glowing circuit-board forest path" width="605" height="752" loading="lazy">
                     <div>
                         <span class="eyebrow">The Book</span>
-                        <h2>The Child Safety Protocol: Online and Beyond</h2>
+                        <h2>The Child Safety Protocol</h2>
+                        <h3 class="subtitle">A Practical Guide to Protecting Kids Online and Beyond</h3>
                         <span class="status">Coming soon</span>
                         <p>Most child safety advice is built for a world that no longer exists. This book treats family safety like an engineering problem: a clinical, blueprint-level manual for hardening your family's environment against modern exploitation, before a failure happens.</p>
                         <ul>
