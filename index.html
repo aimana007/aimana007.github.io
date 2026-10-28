@@ -245,6 +245,77 @@
         .social svg { width: 20px; height: 20px; fill: currentColor; }
         footer small { color: var(--muted); }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://aimana.org/#me",
+          "name": "Aiman Al-Khazaali",
+          "url": "https://aimana.org/",
+          "image": "https://aimana.org/images/portrait.jpeg",
+          "jobTitle": "Linux, DevOps & Site Reliability Engineer",
+          "description": "Linux, DevOps and site reliability engineer with nearly two decades in systems and security. Author of The Child Safety Protocol and creator of Ungated.",
+          "knowsAbout": [
+            "Linux",
+            "DevOps",
+            "Site Reliability Engineering",
+            "High Performance Computing",
+            "Cloud Infrastructure",
+            "Azure",
+            "AWS",
+            "CI/CD",
+            "Cybersecurity",
+            "Child Online Safety"
+          ],
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "SUNY Brockport"
+          },
+          "hasCredential": {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Red Hat Certified System Administrator (RHCSA)",
+            "credentialCategory": "certification"
+          },
+          "sameAs": [
+            "https://www.linkedin.com/in/aimana",
+            "https://github.com/aimana007",
+            "https://www.instagram.com/aimana007/",
+            "https://ink.aimana.org/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://aimana.org/#site",
+          "url": "https://aimana.org/",
+          "name": "Aiman Al-Khazaali",
+          "publisher": {
+            "@id": "https://aimana.org/#me"
+          }
+        },
+        {
+          "@type": "Book",
+          "name": "The Child Safety Protocol: Online and Beyond",
+          "author": {
+            "@id": "https://aimana.org/#me"
+          },
+          "description": "A defense-in-depth playbook that treats family safety like an engineering problem: layered, structural boundaries around gaming, messaging and AI platforms."
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Ungated",
+          "url": "https://useungated.com/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "A job search tracker: drag applications from prospect to offer, share your board with a coach or recruiter, and keep a state work search log.",
+          "creator": {
+            "@id": "https://aimana.org/#me"
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 <div class="frame">
