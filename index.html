@@ -1,50 +1,378 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Aiman Al-Khazaali | Personal Website</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="UTF-8">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CPoppins:400,500" rel="stylesheet">
-        <link href="common-css/ionicons.css" rel="stylesheet">
-        <link rel="stylesheet" href="common-css/jquery.classycountdown.css" />
-        <link href="08-comming-soon/css/styles.css" rel="stylesheet">
-        <link href="08-comming-soon/css/responsive.css" rel="stylesheet">
-        <link rel="icon" href="/assets/img/favicons/favicon.ico" sizes="any">
-        <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
-        <link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png">
-        <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aiman Al-Khazaali | Linux, DevOps &amp; Site Reliability Engineer</title>
+    <meta name="description" content="Aiman Al-Khazaali: Linux, DevOps and site reliability engineer with 20+ years in systems and cybersecurity. Author of The Child Safety Protocol: Online and Beyond.">
+    <link rel="canonical" href="https://aimana.org/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aiman Al-Khazaali">
+    <meta property="og:url" content="https://aimana.org/">
+    <meta property="og:title" content="Aiman Al-Khazaali | Linux, DevOps &amp; SRE">
+    <meta property="og:description" content="20+ years in systems and cybersecurity. Author of The Child Safety Protocol: Online and Beyond.">
+    <meta property="og:image" content="https://aimana.org/images/bg.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="/assets/img/favicons/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/assets/img/favicons/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/img/favicons/site.webmanifest">
+    <meta name="theme-color" content="#0b0d0b">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0b0d0b;
+            --panel: rgba(18, 22, 18, 0.82);
+            --text: #e8ece8;
+            --muted: #9aa59a;
+            --accent: #a6f21c;
+            --line: rgba(166, 242, 28, 0.25);
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            padding: clamp(10px, 3vw, 30px);
+            background: #404040;
+            color: var(--text);
+            font: 17px/1.65 "Open Sans", system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Gray frame + shadowed panel, carried over from the old coming-soon page */
+        .frame {
+            background: var(--bg);
+            box-shadow: 2px 5px 30px rgba(0,0,0,.3);
+            overflow: hidden;
+        }
+        .hero {
+            position: relative;
+            min-height: calc(100vh - 2 * clamp(10px, 3vw, 30px));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 48px 16px 88px;
+            background: linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)), url(images/bg.jpeg) center / cover no-repeat;
+        }
+        .scroll-cue {
+            position: absolute;
+            left: 50%;
+            bottom: 18px;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .scroll-cue svg { width: 26px; height: 26px; animation: nudge 1.8s ease-in-out infinite; }
+        @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+        @media (prefers-reduced-motion: reduce) { .scroll-cue svg { animation: none; } }
+        .hero img { display: block; width: 96px; height: 96px; margin: 0 auto 2px; }
+        .hero h1 { font-size: clamp(35px, 7vw, 48px); font-weight: 500; line-height: 1.1; color: #fff; }
+        .hero .role { color: var(--accent); font-family: Poppins, sans-serif; font-weight: 500; font-size: clamp(16px, 3vw, 21px); margin: 4px 0 20px; }
+        .hero .lede { max-width: 620px; margin: 0 auto 32px; color: var(--muted); }
+
+        .btns { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+        .btn {
+            display: inline-block;
+            padding: 12px 26px;
+            border-radius: 999px;
+            font-family: Poppins, sans-serif;
+            font-weight: 500;
+            text-decoration: none;
+            border: 2px solid var(--accent);
+            transition: background .2s, color .2s;
+        }
+        .btn-solid { background: var(--accent); color: #0b0d0b; }
+        .btn-solid:hover { background: transparent; color: var(--accent); }
+        .btn-ghost { color: var(--accent); }
+        .btn-ghost:hover { background: var(--accent); color: #0b0d0b; }
+
+        section.block { padding: 88px 16px; }
+        .wrap { max-width: 960px; margin: 0 auto; }
+        .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: .12em; font-size: 13px; font-weight: 600; }
+        .block h2 { font-size: clamp(28px, 5vw, 40px); margin: 8px 0 20px; }
+
+        .book {
+            display: grid;
+            gap: 40px;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 40px;
+            background: var(--panel);
+        }
+        @media (min-width: 800px) { .book { grid-template-columns: 240px 1fr; } }
+        .cover {
+            aspect-ratio: 2 / 3;
+            width: 100%;
+            max-width: 240px;
+            margin: 0 auto;
+            border-radius: 6px;
+            background: linear-gradient(160deg, #1a2214, #070907);
+            border: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.6), inset 0 0 0 1px rgba(166,242,28,.08);
+        }
+        .cover strong { font-family: Poppins, sans-serif; font-weight: 500; font-size: 24px; line-height: 1.15; }
+        .cover span { color: var(--accent); font-size: 14px; margin-top: 8px; }
+        .cover em { color: var(--muted); font-style: normal; font-size: 12px; margin-top: 18px; letter-spacing: .08em; text-transform: uppercase; }
+        .book ul { padding-left: 20px; color: var(--muted); }
+        .book li { margin-bottom: 6px; }
+        .status { display: inline-block; margin-bottom: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--accent); font-size: 13px; }
+
+        .project {
+            display: grid;
+            gap: 32px;
+            align-items: center;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 40px;
+            background: var(--panel);
+        }
+        @media (min-width: 800px) { .project { grid-template-columns: 1fr 300px; } }
+        .project h3 { font-size: clamp(22px, 4vw, 28px); margin-bottom: 4px; }
+        .project .tagline { color: var(--accent); margin: 0 0 16px; }
+        .project p { color: var(--muted); }
+        .project ul { padding-left: 20px; color: var(--muted); margin: 0 0 24px; }
+        .project li { margin-bottom: 6px; }
+        /* Mini Ungated cards: same look as the tracker's .app-card (ungated/public/seeker.html) */
+        .board { display: flex; flex-direction: column; gap: 10px; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+        .board .col { color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; margin: 4px 0 -4px; }
+        .app-card { background: #fff; color: #1f2937; border: 1px solid #e5e7eb; border-left: 4px solid transparent; border-radius: 12px; box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 6px 12px rgba(0,0,0,.05); padding: 10px 12px; font-size: 13px; line-height: 1.4; }
+        .app-card[data-status="Applied"] { border-left-color: #10b981; }
+        .app-card[data-status="Interviewing"] { border-left-color: #22c55e; }
+        .app-card[data-status="Offer"] { border-left-color: #f59e0b; }
+        .app-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+        .app-title { font-weight: 650; }
+        .app-title .role { display: block; color: #374151; font-weight: 500; }
+        .app-card .meta { color: #6b7280; font-size: 12px; margin-top: 2px; }
+        .app-card .note { margin-top: 6px; color: #1f2937; }
+        .app-card .next-action { margin-top: 6px; font-size: 12px; color: #475569; font-weight: 500; }
+        .pill { display: inline-flex; align-items: center; font-size: 11px; padding: 1px 8px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+        .badge-ok { background: #dcfce7; color: #166534; }
+        .badge-soon { background: #fef3c7; color: #92400e; }
+        .pill-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+        .stage-pill { background: #f1f5f9; color: #334155; border: 1px solid #e5e7eb; font-weight: 500; }
+        .stage-pill.active { background: #475569; color: #f6f7fb; border-color: transparent; }
+        .tag-pill { background: #eef2ff; color: #3730a3; font-weight: 500; }
+        @media (max-width: 799px) { .project { padding: 28px 22px; } .board { display: none; } }
+        .wins { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 32px 0 56px; }
+        .win { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel); }
+        .win strong { display: block; font-family: Poppins, sans-serif; font-weight: 500; font-size: clamp(30px, 5vw, 38px); line-height: 1.1; color: var(--accent); }
+        .win span { display: block; margin-top: 8px; color: var(--text); font-size: 15px; line-height: 1.45; }
+        .win em { display: block; margin-top: 8px; color: var(--muted); font-style: normal; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+        .timeline { list-style: none; margin: 24px 0 0; padding: 0 0 0 22px; border-left: 2px solid var(--line); }
+        .timeline li { position: relative; padding: 0 0 26px; }
+        .timeline li::before { content: ''; position: absolute; left: -29px; top: 7px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+        .timeline li:first-child::before { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+        .timeline .when { color: var(--accent); font-size: 13px; letter-spacing: .06em; }
+        .timeline h3 { font-size: 18px; margin: 2px 0 2px; }
+        .timeline h3 small { color: var(--muted); font-family: "Open Sans", sans-serif; font-size: 15px; font-weight: 400; }
+        .timeline p { margin: 0; color: var(--muted); font-size: 15px; max-width: 720px; }
+        .stack-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .stack-chips span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--text); background: var(--panel); }
+
+        footer { border-top: 1px solid var(--line); padding: 48px 16px; text-align: center; }
+        .follow { margin: 40px 0 14px; color: var(--muted); font-size: 15px; }
+        .social { display: flex; gap: 18px; justify-content: center; margin: 0; padding: 0; list-style: none; }
+        .social a { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--line); color: var(--text); transition: color .2s, border-color .2s; }
+        .social a:hover { color: var(--accent); border-color: var(--accent); }
+        .social svg { width: 20px; height: 20px; fill: currentColor; }
+        footer small { color: var(--muted); }
+    </style>
 </head>
 <body>
-        <div class="main-area-wrapper">
-                <div class="main-area center-text" style="background-image:url(images/bg.jpeg);" >
-                        <div class="display-table">
-                                <div class="display-table-cell">
-                                        <img src="/images/aalogo.png" alt="Aiman Al-Khazaali Logo" style="display:block;margin:0 auto 20px;width:80px;height:80px;">
-                                        <h2 class="title"><b>Coming ...Eventually</b></h1><br>
-                                        <h4>Aiman Al-Khazaali  | Linux, DevOps & Site Reliability Engineer</h4>
-                                        <h5>Please have a look at my new book <a href="https://www.kickstarter.com/projects/aimana/the-child-safety-protocol"><b><u>The Child Safety Protocol</u></b></a>.</h5>
-                                        <p class="desc font-white">Help me spread the word! Here is a  <a href="https://aimana.org/press.pdf"><b><u>media kit!</u></b></a><br>
-                                        Thank you for your support. The Kickstarter is LIVE!</p><br>
-<!--                                        <div id="normal-countdown" data-date="2026/07/21"></div> -->
-                                        <ul class="social-btn">
-                                                <li class="list-heading">Follow me on social media for updates</li>
-<!--                                            <li><a href="https://facebook.com/aimana"><i class="ion-social-facebook"></i></a></li> -->
-                                                <li><a href="https://linkedin.com/in/aimana"><i class="ion-social-linkedin"></i></a></li>
-                                                <li><a href="https://github.com/aimana007"><i class="ion-social-github"></i></a></li>
-                                                <li><a href="https://www.instagram.com/aimana007/"><i class="ion-social-instagram-outline"></i></a></li>
-                                        </ul>
+<div class="frame">
+    <header class="hero">
+        <div>
+            <img src="/images/aalogo.png" alt="Aiman Al-Khazaali logo" width="96" height="96">
+            <h1>Aiman Al-Khazaali</h1>
+            <p class="role">Linux, DevOps &amp; Site Reliability Engineer</p>
+            <p class="lede">Twenty-plus years keeping systems up, secure and boring in the best way. Author of <em>The Child Safety Protocol</em>, a defense-in-depth playbook for protecting kids online and beyond.</p>
+            <div class="btns">
+                <a class="btn btn-solid" href="#book">The Book</a>
+                <a class="btn btn-ghost" href="https://linkedin.com/in/aimana">Work With Me</a>
+            </div>
+            <p class="follow">Follow me on social media for updates</p>
+            <ul class="social">
+                <li><a href="https://linkedin.com/in/aimana" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a></li>
+                <li><a href="https://github.com/aimana007" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.82-.26.82-.57v-2.04c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57A12 12 0 0 0 12 .3"/></svg></a></li>
+                <li><a href="https://www.instagram.com/aimana007/" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a></li>
+            </ul>
+        </div>
+        <a class="scroll-cue" href="#book" aria-label="Scroll to the book">
+            More
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </a>
+    </header>
 
-                                </div><!-- display-table -->
-                        </div><!-- display-table-cell -->
-                </div><!-- main-area -->
-        </div><!-- main-area-wrapper -->
+    <main>
+        <section class="block" id="book">
+            <div class="wrap">
+                <div class="book">
+                    <div class="cover" aria-hidden="true">
+                        <strong>The Child Safety Protocol</strong>
+                        <span>Online and Beyond</span>
+                        <em>Aiman Al-Khazaali</em>
+                    </div>
+                    <div>
+                        <span class="eyebrow">The Book</span>
+                        <h2>The Child Safety Protocol: Online and Beyond</h2>
+                        <span class="status">Coming soon</span>
+                        <p>Most child safety advice is built for a world that no longer exists. This book treats family safety like an engineering problem: a clinical, blueprint-level manual for hardening your family's environment against modern exploitation, before a failure happens.</p>
+                        <ul>
+                            <li>Layered, structural boundaries around gaming, messaging and AI platforms</li>
+                            <li>Defense in depth for parents, not just another parental-control app</li>
+                            <li>Written by a systems and cybersecurity engineer, not a fear merchant</li>
+                        </ul>
+                        <p>Follow along for the release announcement:</p>
+                        <div class="btns" style="justify-content:flex-start">
+                            <a class="btn btn-ghost" href="https://www.instagram.com/aimana007/">Instagram</a>
+                            <a class="btn btn-ghost" href="https://linkedin.com/in/aimana">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- SCIPTS -->
-        <script src="common-js/jquery-3.1.1.min.js"></script>
-        <script src="common-js/jquery.countdown.min.js"></script>
-        <script src="common-js/scripts.js"></script>
+        <section class="block" id="built" style="padding-top:0">
+            <div class="wrap">
+                <span class="eyebrow">Things I Built</span>
+                <h2>Ungated</h2>
+                <div class="project">
+                    <div>
+                        <h3>Ungate your job search</h3>
+                        <p class="tagline">Hiring has more gates than ever. Keep track of every one you knock on.</p>
+                        <p>A job search tracker I designed and built end to end: drag applications from prospect to offer, keep contacts, salary and next steps in one place, and share your board with a coach or recruiter.</p>
+                        <ul>
+                            <li>Works offline in the browser and syncs when you're back online</li>
+                            <li>Unemployment work search log that follows state rules, printable by benefit week</li>
+                            <li>Passwordless sign-in, revocable sharing, full export anytime</li>
+                            <li>Free for your first 30 applications, then a one-time pass: no subscription, no saved credit card</li>
+                        </ul>
+                        <div class="btns" style="justify-content:flex-start">
+                            <a class="btn btn-solid" href="https://useungated.com">Try Ungated</a>
+                        </div>
+                    </div>
+                    <div class="board" aria-hidden="true">
+                        <span class="col">Applied</span>
+                        <div class="app-card" data-status="Applied">
+                            <div class="app-head">
+                                <div class="app-title">Queso Computing<span class="role">DevOps Engineer</span></div>
+                                <span class="pill badge-ok">4d</span>
+                            </div>
+                            <div class="meta">Remote (US) · $110k–$135k</div>
+                            <div class="pill-row"><span class="pill tag-pill">referral</span><span class="pill tag-pill">remote</span></div>
+                        </div>
+                        <span class="col">Interviewing</span>
+                        <div class="app-card" data-status="Interviewing">
+                            <div class="app-head">
+                                <div class="app-title">Spreadsheet Cowboys LLP<span class="role">Senior Spreadsheet Wrangler</span></div>
+                                <span class="pill badge-soon">due Thu</span>
+                            </div>
+                            <div class="meta">Austin, TX · Contact: Brenda from HR</div>
+                            <div class="pill-row"><span class="pill stage-pill active">Phone screen</span><span class="pill stage-pill">Onsite</span><span class="pill stage-pill">Final</span></div>
+                            <div class="next-action">Next: Send thank-you note · Thu</div>
+                        </div>
+                        <span class="col">Offer</span>
+                        <div class="app-card" data-status="Offer">
+                            <div class="app-head">
+                                <div class="app-title">Kombucha Kubernetes<span class="role">Cloud Whisperer</span></div>
+                            </div>
+                            <div class="meta">Hybrid, Austin · $95k + snacks</div>
+                            <div class="note">Free snacks mentioned four times.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="block" id="work" style="padding-top:0">
+            <div class="wrap">
+                <span class="eyebrow">The Day Job</span>
+                <h2>Systems that stay up</h2>
+                <p style="color:var(--muted); max-width:680px">From supercomputers to streaming radio to medical records, I build and run the infrastructure nobody notices until it breaks, and I make sure it doesn't.</p>
+                <div class="wins">
+                    <div class="win"><strong>&lt;3 hrs</strong><span>to restore every service during an Anonymous DDoS attack</span><em>iHeartRadio</em></div>
+                    <div class="win"><strong>$300k</strong><span>a year saved by finding and sunsetting programs nobody was using</span><em>Transcat</em></div>
+                    <div class="win"><strong>0 min</strong><span>of downtime migrating several acquisitions into Azure and AWS at once</span><em>Transcat</em></div>
+                    <div class="win"><strong>1,500+</strong><span>servers deployed with automated installs, nine weeks ahead of schedule</span><em>Walmart</em></div>
+                </div>
+                <h3 style="font-size:22px">Where I've been</h3>
+                <ol class="timeline">
+                    <li>
+                        <span class="when">2025–2026</span>
+                        <h3>Transcat <small>· Senior Infrastructure Engineer</small></h3>
+                        <p>Folded several acquired companies' infrastructure into Azure and AWS at the same time, with zero downtime, and cut $300k a year in unused spend.</p>
+                    </li>
+                    <li>
+                        <span class="when">2024–2025</span>
+                        <h3>University of Rochester <small>· Systems Engineer 3</small></h3>
+                        <p>Stood up GitLab on Active Directory and led the move of Epic medical records from IBM AIX to Red Hat Linux.</p>
+                    </li>
+                    <li>
+                        <span class="when">2022–2023</span>
+                        <h3>Dell Technologies <small>· Principal Systems Development Engineer</small></h3>
+                        <p>Built performance models that predicted how customers' applications would run, and designed the server solutions to match.</p>
+                    </li>
+                    <li>
+                        <span class="when">2016–2021</span>
+                        <h3>Citadel Cube <small>· Senior Linux Engineer</small></h3>
+                        <p>Architected a multi-site high-availability cloud, wrote the company's SDLC from scratch and automated it with Jenkins CI/CD.</p>
+                    </li>
+                    <li>
+                        <span class="when">2015</span>
+                        <h3>eBay <small>· Technical Duty Officer / SRE</small></h3>
+                        <p>Ran incident bridges and release calls for eBay's production site, and mentored junior Linux and security engineers.</p>
+                    </li>
+                    <li>
+                        <span class="when">2014–2015</span>
+                        <h3>NOAA <small>· Supercomputer Linux Admin</small></h3>
+                        <p>Primary admin for a Cray supercomputer on Panasas storage: storage tracking, usage limits and security patches scheduled around the workload.</p>
+                    </li>
+                    <li>
+                        <span class="when">2011–2014</span>
+                        <h3>iHeartRadio / Clear Channel <small>· Senior Linux Engineer & Architect</small></h3>
+                        <p>Beat back an Anonymous DDoS in under three hours, built the streaming infrastructure and ran tech on-site at the festivals.</p>
+                    </li>
+                    <li>
+                        <span class="when">2011</span>
+                        <h3>Walmart (via UST Global) <small>· Hadoop HPC Deployment Engineer</small></h3>
+                        <p>Automated PXE/AutoYaST installs across 1,500+ servers and delivered nine weeks early.</p>
+                    </li>
+                    <li>
+                        <span class="when">2008–2011</span>
+                        <h3>Rackspace <small>· Core Systems Engineer → Senior Linux Support</small></h3>
+                        <p>Owned “CORE down” emergencies and kept enterprise clusters, Oracle RAC and Xen clouds healthy, 100+ escalations a day.</p>
+                    </li>
+                </ol>
+                <div class="stack-chips">
+                    <span>RHEL</span><span>SUSE</span><span>Windows Server</span><span>Azure</span><span>AWS</span><span>VMware</span><span>Xen</span><span>GitLab</span><span>Jenkins CI/CD</span><span>Hadoop</span><span>Cray &amp; SGI</span><span>HPC</span><span>AI / LLMs</span><span>Security testing</span><span>Disaster recovery</span><span>Ubiquiti</span><span>RHCSA</span><span>B.S. Computer Science, SUNY Brockport</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <small>&copy; 2026 Aiman Al-Khazaali</small>
+    </footer>
+</div>
 </body>
 </html>
