@@ -237,6 +237,11 @@
         .timeline h3 { font-size: 18px; margin: 2px 0 2px; }
         .timeline h3 small { color: var(--muted); font-family: "Open Sans", sans-serif; font-size: 15px; font-weight: 400; }
         .timeline p { margin: 0; color: var(--muted); font-size: 15px; max-width: 720px; }
+        .timeline li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); column-gap: 28px; }
+        .timeline li > * { grid-column: 1; }
+        .timeline .logo { grid-column: 2; grid-row: 1 / span 3; align-self: center; justify-self: center; width: var(--w); height: var(--h); background: var(--muted); opacity: .75; -webkit-mask: var(--logo) center / contain no-repeat; mask: var(--logo) center / contain no-repeat; transition: background-color .2s, opacity .2s; }
+        .timeline li:hover .logo { background: var(--accent); opacity: 1; }
+        @media (max-width: 600px) { .timeline li { grid-template-columns: minmax(0, 1fr) 74px; column-gap: 14px; } .timeline .logo { width: calc(var(--w) * .65); height: calc(var(--h) * .65); } }
         .stack-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
         .stack-chips span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 13px; color: var(--text); background: var(--panel); }
 
@@ -451,46 +456,55 @@
                         <span class="when">2025–2026</span>
                         <h3>Transcat <small>· Senior Infrastructure Engineer</small></h3>
                         <p>Folded several acquired companies' infrastructure into Azure and AWS with zero downtime, and cut $300k a year in unused spend.</p>
+                        <span class="logo" style="--logo: url(/images/logos/transcat.png); --w: 104px; --h: 19px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2024–2025</span>
                         <h3>University of Rochester <small>· Systems Engineer 3</small></h3>
                         <p>Kept the Epic medical records system running day to day for UR Medicine, a 20,000-employee health system, and helped migrate it from IBM AIX to Red Hat Linux.</p>
+                        <span class="logo" style="--logo: url(/images/logos/urmc.png); --w: 76px; --h: 65px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2022–2023</span>
                         <h3>Dell Technologies <small>· Principal Systems Development Engineer</small></h3>
                         <p>Built performance models that predicted how customers' applications would run, and designed the server solutions to match.</p>
+                        <span class="logo" style="--logo: url(/images/logos/dell.svg); --w: 45px; --h: 45px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2016–2021</span>
                         <h3>Citadel Cube <small>· Senior Linux Engineer</small></h3>
                         <p>Architected a multi-site high-availability cloud, wrote the company's SDLC from scratch and automated it with Jenkins CI/CD.</p>
+                        <span class="logo" style="--logo: url(/images/logos/citadelcube.png); --w: 74px; --h: 44px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2015</span>
                         <h3>eBay <small>· Technical Duty Officer / SRE</small></h3>
                         <p>Ran incident bridges and release calls for eBay's production site, and mentored junior Linux and security engineers.</p>
+                        <span class="logo" style="--logo: url(/images/logos/ebay.svg); --w: 76px; --h: 30px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2014–2015</span>
                         <h3>NOAA <small>· Supercomputer Linux Admin</small></h3>
                         <p>Primary admin for a Cray supercomputer on Panasas storage: storage tracking, usage limits and security patches scheduled around the workload.</p>
+                        <span class="logo" style="--logo: url(/images/logos/noaa.png); --w: 44px; --h: 44px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2011–2014</span>
                         <h3>iHeartRadio / Clear Channel <small>· Senior Linux Engineer & Architect</small></h3>
                         <p>Beat back an Anonymous DDoS in under three hours, built the streaming infrastructure and ran tech on-site at the festivals.</p>
+                        <span class="logo" style="--logo: url(/images/logos/iheartradio.svg); --w: 42px; --h: 54px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2011</span>
                         <h3>Walmart (via UST Global) <small>· Hadoop HPC Deployment Engineer</small></h3>
                         <p>Automated PXE/AutoYaST installs across 1,500+ servers and delivered nine weeks early.</p>
+                        <span class="logo" style="--logo: url(/images/logos/walmart.svg); --w: 98px; --h: 24px" aria-hidden="true"></span>
                     </li>
                     <li>
                         <span class="when">2008–2011</span>
                         <h3>Rackspace <small>· Core Systems Engineer → Senior Linux Support</small></h3>
                         <p>Owned “CORE down” emergencies and kept enterprise clusters, Oracle RAC and Xen clouds healthy, 100+ escalations a day.</p>
+                        <span class="logo" style="--logo: url(/images/logos/rackspace.png); --w: 99px; --h: 20px" aria-hidden="true"></span>
                     </li>
                 </ol>
                 <div class="stack-chips">
