@@ -244,6 +244,9 @@
         .timeline li:hover .logo { background: var(--accent); opacity: 1; }
         @media (max-width: 600px) { .timeline li { grid-template-columns: minmax(0, 1fr) 74px; column-gap: 14px; } .timeline .logo { width: calc(var(--w) * .65); height: calc(var(--h) * .65); } }
         .stack-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .skills { display: grid; gap: 20px; margin-top: 18px; }
+        .skill-group .stack-chips { margin-top: 8px; }
+        @media (min-width: 800px) { .skill-group { display: grid; grid-template-columns: 210px 1fr; column-gap: 24px; align-items: start; } .skill-group .eyebrow { padding-top: 6px; } .skill-group .stack-chips { margin-top: 0; } }
         .stack-chips span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 14px; color: var(--text); background: var(--panel); }
 
         footer { border-top: 1px solid var(--line); padding: 48px 16px; text-align: center; }
@@ -427,8 +430,18 @@
                         <span class="logo" style="--logo: url(/images/logos/rackspace.png); --w: 99px; --h: 20px" aria-hidden="true"></span>
                     </li>
                 </ol>
-                <div class="stack-chips">
-                    <span>RHEL</span><span>SUSE</span><span>Windows Server</span><span>Azure</span><span>AWS</span><span>VMware</span><span>Xen</span><span>GitLab</span><span>Jenkins CI/CD</span><span>Hadoop</span><span>Cray &amp; SGI</span><span>HPC</span><span>AI / LLMs</span><span>Security testing</span><span>Disaster recovery</span><span>Ubiquiti</span><span>RHCSA</span><span>Computer Science, SUNY Brockport</span>
+                <h3 style="font-size:22px; margin-top:48px">What I work with</h3>
+                <div class="skills">
+                    <div class="skill-group"><span class="eyebrow">Operating systems</span><div class="stack-chips"><span>RHEL</span><span>SUSE / SLES</span><span>Windows Server</span><span>IBM AIX</span><span>Windows Desktop</span><span>macOS</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Generalist skills</span><div class="stack-chips"><span>Systems administration</span><span>Systems tuning</span><span>Database administration</span><span>Data migration</span><span>Performance modeling</span><span>Performance monitoring</span><span>Cost optimization</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Cloud &amp; virtualization</span><div class="stack-chips"><span>Azure</span><span>AWS</span><span>VMware ESX</span><span>Xen</span><span>Docker</span><span>Private cloud</span><span>High availability</span><span>Multi-site failover</span><span>SaaS</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Automation &amp; CI/CD</span><div class="stack-chips"><span>GitLab</span><span>Jenkins</span><span>CI/CD pipelines</span><span>Deployment scripting</span><span>PXE / AutoYaST</span><span>Release management</span><span>SDLC design</span><span>API management</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">HPC &amp; clusters</span><div class="stack-chips"><span>Cray</span><span>SGI Altix</span><span>Panasas</span><span>Hadoop</span><span>Oracle RAC / RHCS</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Security &amp; compliance</span><div class="stack-chips"><span>Security testing</span><span>Penetration testing</span><span>Incident response</span><span>DDoS mitigation</span><span>Cloud security</span><span>Disaster recovery</span><span>Backups</span><span>HIPAA</span><span>PCI</span><span>SOX</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Networking &amp; operations</span><div class="stack-chips"><span>Ubiquiti</span><span>Network infrastructure</span><span>Load balancing</span><span>Active Directory</span><span>Apache</span><span>Datacenter operations</span><span>ITIL / ITSM</span><span>Vendor management</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">AI</span><div class="stack-chips"><span>Self-hosted LLMs</span><span>Ollama</span><span>llama.cpp</span><span>GPU inference</span><span>Claude</span><span>ChatGPT</span><span>Gemini</span><span>AI-assisted development</span><span>Machine learning</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Leadership</span><div class="stack-chips"><span>Mentoring</span><span>Technical project management</span><span>Solution architecture</span><span>Pre-sales SME</span><span>Risk management</span></div></div>
+                    <div class="skill-group"><span class="eyebrow">Certifications &amp; education</span><div class="stack-chips"><span>RHCSA</span><span>Computer Science, SUNY Brockport</span></div></div>
                 </div>
                 <div class="btns" style="justify-content:flex-start; margin-top:28px">
                     <a class="btn btn-solid" href="https://linkedin.com/in/aimana">Connect on LinkedIn</a>
