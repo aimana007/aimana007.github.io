@@ -248,6 +248,26 @@
         .skill-group .stack-chips { margin-top: 8px; }
         @media (min-width: 800px) { .skill-group { display: grid; grid-template-columns: 210px 1fr; column-gap: 24px; align-items: start; } .skill-group .eyebrow { padding-top: 6px; } .skill-group .stack-chips { margin-top: 0; } }
         .stack-chips span { border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 14px; color: var(--text); background: var(--panel); }
+        .lab { display: grid; gap: 28px; margin-top: 18px; }
+        @media (min-width: 800px) { .lab { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px; align-items: start; } .lab-photo { position: sticky; top: 24px; } }
+        .lab-photo { display: block; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--panel); transition: border-color .2s, box-shadow .2s; }
+        .lab-photo:hover { border-color: var(--accent); box-shadow: 0 0 24px rgba(166,242,28,.25); }
+        .lab-photo img { display: block; width: 100%; height: auto; }
+        .lab-photo { position: relative; cursor: zoom-in; }
+        .lab-photo::after { content: 'Click to enlarge'; position: absolute; right: 10px; bottom: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(11,13,11,.75); color: var(--accent); font-size: 12px; opacity: 0; transition: opacity .2s; }
+        .lab-photo:hover::after, .lab-photo:focus-visible::after { opacity: 1; }
+        .lightbox { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 94vh; cursor: zoom-out; }
+        .lightbox::backdrop { background: rgba(0,0,0,.85); }
+        .lightbox[open] { animation: lb-in .2s ease-out; }
+        @keyframes lb-in { from { opacity: 0; transform: scale(.97); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .lightbox[open] { animation: none; } }
+        .lightbox img { display: block; max-width: 96vw; max-height: 94vh; width: auto; height: auto; border-radius: 10px; border: 1px solid var(--line); }
+        .rack { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .rack li { padding: 0 0 16px 18px; }
+        .rack li:last-child { padding-bottom: 0; }
+        .rack .eyebrow { font-size: 12px; }
+        .rack strong { display: block; font-weight: 600; color: var(--text); font-size: 16px; margin-top: 2px; }
+        .rack span:not(.eyebrow) { display: block; color: var(--muted); font-size: 15px; line-height: 1.45; }
 
         footer { border-top: 1px solid var(--line); padding: 48px 16px; text-align: center; }
         .follow { margin: 40px 0 14px; color: var(--muted); font-size: 15px; }
@@ -442,6 +462,31 @@
                     <div class="skill-group"><span class="eyebrow">AI</span><div class="stack-chips"><span>Self-hosted LLMs</span><span>Ollama</span><span>llama.cpp</span><span>GPU inference</span><span>Claude</span><span>ChatGPT</span><span>Gemini</span><span>AI-assisted development</span><span>Machine learning</span></div></div>
                     <div class="skill-group"><span class="eyebrow">Leadership</span><div class="stack-chips"><span>Mentoring</span><span>Technical project management</span><span>Solution architecture</span><span>Pre-sales SME</span><span>Risk management</span></div></div>
                     <div class="skill-group"><span class="eyebrow">Certifications &amp; education</span><div class="stack-chips"><span>RHCSA</span><span>Computer Science, SUNY Brockport</span></div></div>
+                </div>
+                <h3 style="font-size:22px; margin-top:48px">The rack in my office</h3>
+                <p style="color:var(--muted); margin:8px 0 0">Every tier of a small datacenter, from out-of-band management down to tape, running at home.</p>
+                <div class="lab">
+                    <a class="lab-photo" href="/images/homelab-full.jpg" aria-label="Enlarge photo of the home lab"><img src="/images/homelab.jpg" alt="Home office with a desk, monitor and a full-height Dell server rack" width="1200" height="1067" loading="lazy"></a>
+                    <dialog class="lightbox" id="lab-lightbox" aria-label="Home lab photo"><img src="/images/homelab-full.jpg" alt="Home office with a desk, monitor and a full-height Dell server rack" width="1800" height="1313" loading="lazy"></dialog>
+                    <script>
+                        (function () {
+                            var link = document.querySelector('.lab-photo'), box = document.getElementById('lab-lightbox');
+                            if (!link || !box || typeof box.showModal !== 'function') return;
+                            link.addEventListener('click', function (e) { e.preventDefault(); box.showModal(); });
+                            box.addEventListener('click', function () { box.close(); });
+                        })();
+                    </script>
+                    <ul class="rack">
+                        <li><span class="eyebrow">Out-of-band management</span><strong>Dell 16-port IP KVM</strong><span>Console access to every machine, whatever state the OS is in.</span></li>
+                        <li><span class="eyebrow">Routing &amp; gateway</span><strong>Ubiquiti Dream Machine Pro</strong><span>Edge routing and segmented networks.</span></li>
+                        <li><span class="eyebrow">Switching</span><strong>Fortinet 48-port managed switch</strong><span>High-density switching with a 10G fiber uplink to the gateway.</span></li>
+                        <li><span class="eyebrow">Compute &amp; virtualization</span><strong>2× Dell PowerEdge R730xd with GPUs</strong><span>VMware ESXi and vCenter cluster with DRS, HA and vMotion.</span></li>
+                        <li><span class="eyebrow">Cryptography</span><strong>Dell PowerEdge R620</strong><span>Dedicated, isolated hardware for encryption and key operations.</span></li>
+                        <li><span class="eyebrow">Storage</span><strong>Dell MD3000 iSCSI array + expansion shelf</strong><span>Block storage for lab VMs, staging and media.</span></li>
+                        <li><span class="eyebrow">Backup &amp; archival</span><strong>Dell PowerVault tape library</strong><span>Air-gapped tape backups on weekly and 30-day rotation.</span></li>
+                        <li><span class="eyebrow">Legacy lab</span><strong>3× Dell PowerEdge 2650</strong><span>Bare-metal experiments and regression checks on vintage hardware.</span></li>
+                        <li><span class="eyebrow">Power</span><strong>3× APC UPS</strong><span>Clean power and automated graceful shutdown.</span></li>
+                    </ul>
                 </div>
                 <div class="btns" style="justify-content:flex-start; margin-top:28px">
                     <a class="btn btn-solid" href="https://linkedin.com/in/aimana">Connect on LinkedIn</a>
