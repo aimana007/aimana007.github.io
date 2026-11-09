@@ -225,6 +225,17 @@
         .stage-pill.active { background: #475569; color: #f6f7fb; border-color: transparent; }
         .tag-pill { background: #eef2ff; color: #3730a3; font-weight: 500; }
         @media (max-width: 799px) { .project { padding: 28px 22px; } .board { display: none; } }
+        /* ChronyTop: smaller secondary card under Ungated */
+        .project.mini { margin-top: 24px; padding: 32px; gap: 28px; }
+        @media (min-width: 800px) { .project.mini { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } }
+        @media (max-width: 799px) { .project.mini { padding: 24px 20px; } }
+        .project.mini .status { margin-bottom: 10px; }
+        .project.mini ul { margin-bottom: 20px; }
+        .shot { display: block; position: relative; cursor: zoom-in; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #000; transition: border-color .2s, box-shadow .2s; }
+        .shot:hover { border-color: var(--accent); box-shadow: 0 0 24px rgba(166,242,28,.25); }
+        .shot img { display: block; width: 100%; height: auto; }
+        .shot::after { content: 'Click to enlarge'; position: absolute; right: 10px; bottom: 10px; padding: 3px 10px; border-radius: 999px; background: rgba(11,13,11,.75); color: var(--accent); font-size: 12px; opacity: 0; transition: opacity .2s; }
+        .shot:hover::after, .shot:focus-visible::after { opacity: 1; }
         .wins { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin: 32px 0 56px; }
         .win { border: 1px solid var(--line); border-radius: 14px; padding: 22px; background: var(--panel); }
         .win strong { display: block; font-family: Poppins, sans-serif; font-weight: 500; font-size: clamp(30px, 5vw, 38px); line-height: 1.1; color: var(--accent); }
@@ -548,6 +559,33 @@
                             <div class="note">Free snacks mentioned four times.</div>
                         </div>
                     </div>
+                </div>
+                <div class="project mini" id="chronytop">
+                    <div>
+                        <span class="status">Open source · Python</span>
+                        <h3>ChronyTop</h3>
+                        <p class="tagline">Like <code>top</code>, but for your clock.</p>
+                        <p>A live terminal dashboard for chrony, the Linux time sync daemon. It shows how far the clock is off, how noisy it is, and which NTP servers deserve your trust.</p>
+                        <ul>
+                            <li>Live graphs for offset, jitter, frequency drift and skew</li>
+                            <li>Trust score for every NTP source from reachability, error, stability and stratum</li>
+                            <li>Alerts for big offsets, lost sources, time jumps and suspend/resume</li>
+                            <li>Flags CPU temperature swings that drag the clock with them</li>
+                        </ul>
+                        <div class="btns" style="justify-content:flex-start">
+                            <a class="btn btn-ghost" href="https://github.com/aimana007/ChronyTop">View on GitHub</a>
+                        </div>
+                    </div>
+                    <a class="shot" href="/images/chronytop.png" aria-label="Enlarge ChronyTop screenshot"><img src="/images/chronytop.png" alt="ChronyTop running in a terminal: clock offset, jitter, frequency and temperature graphs above a table of NTP servers with trust scores" width="1919" height="1090" loading="lazy"></a>
+                    <dialog class="lightbox" id="ct-lightbox" aria-label="ChronyTop screenshot"><img src="/images/chronytop.png" alt="ChronyTop running in a terminal: clock offset, jitter, frequency and temperature graphs above a table of NTP servers with trust scores" width="1919" height="1090" loading="lazy"></dialog>
+                    <script>
+                        (function () {
+                            var link = document.querySelector('.shot'), box = document.getElementById('ct-lightbox');
+                            if (!link || !box || typeof box.showModal !== 'function') return;
+                            link.addEventListener('click', function (e) { e.preventDefault(); box.showModal(); });
+                            box.addEventListener('click', function () { box.close(); });
+                        })();
+                    </script>
                 </div>
             </div>
         </section>
